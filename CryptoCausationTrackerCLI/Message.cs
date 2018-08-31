@@ -22,6 +22,49 @@ namespace CryptoCausationTrackerCLI
         public string low { get; set; }
         public string volume { get; set; }
         public string timestamp { get; set; }
+
+        public Message()
+        {
+
+        }
+
+        public Message(Message msgGet)
+        {
+            exchange = msgGet.exchange;
+            cryptocurrency = msgGet.cryptocurrency;
+            basecurrency = msgGet.basecurrency;
+            type = msgGet.type;
+            price = msgGet.price;
+            size = msgGet.size;
+            bid = msgGet.bid;
+            ask = msgGet.ask;
+            open = msgGet.open;
+            high = msgGet.high;
+            low = msgGet.low;
+            volume = msgGet.volume;
+            timestamp = msgGet.timestamp;
+
+
+        }
+
+        public Message(string exchangeP, string cryptocurrencyP, string basecurrencyP, string typeP, string priceP,
+        object sizeP, string bidP, string askP, object openP, string highP, string lowP, string volumeP, string timestampP)
+        {
+           exchange = exchangeP;
+           cryptocurrency = cryptocurrencyP;
+           basecurrency = basecurrencyP;
+           type = typeP;
+           price = priceP;
+           size = sizeP;
+           bid = bidP;
+           ask = askP;
+           open = openP;
+           high = highP;
+           low = lowP;
+           volume = volumeP;
+           timestamp = timestampP;
+
+        }
     }
 
 }

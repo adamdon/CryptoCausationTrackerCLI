@@ -19,41 +19,56 @@ namespace CryptoCausationTrackerCLI
         const string channel = "cryptocurrency-market-data";
 
         static string strOutputText = "Error1";
-        string strType;
+        static string strSearchCriteria = "ETH";
+        static public List<Message> msgListOfMessages = new List<Message>();
+        static public List<Message> msgListOfSearchedMessages = new List<Message>();
+        static int intIndexOfForLoop = 0;
 
         static void Main()
         {
-            // Log messages from SDK to the console
             Trace.Listeners.Add(new ConsoleTraceListener());
-
             IRtmClient client = new RtmClientBuilder(endpoint, appkey).Build();
             client.OnEnterConnected += cn => Console.WriteLine("Connected to Satori RTM!");
             client.Start();
-
-            // Create subscription observer to observe channel subscription events 
             var observer = new SubscriptionObserver();
+
 
             observer.OnSubscriptionData += (ISubscription sub, RtmSubscriptionData data) =>
             {
                 foreach (JToken msg in data.Messages)
                 {
-                    //Console.WriteLine("Got message: " + msg);
                     strOutputText = msg.ToString();
-                    Console.WriteLine("Coin: " + ReadToObject(strOutputText).cryptocurrency);
-                    Console.WriteLine("Price: " + ReadToObject(strOutputText).price);
-                    //strType
-                    //new Message = ReadToObject(strOutputText);
+                    Message msgTempMessage = new Message(ReadToObject(strOutputText));
+                    msgListOfMessages.Insert(intIndexOfForLoop, msgTempMessage);
+
+                    SearchMessages(strSearchCriteria, intIndexOfForLoop);
+                    View.Update(intIndexOfForLoop);
+                    intIndexOfForLoop = intIndexOfForLoop + 1;
                 }
             };
 
-            Console.WriteLine("Test end of forloop");
+            
             client.CreateSubscription(channel, SubscriptionModes.Simple, observer);
-
             Console.ReadKey();
-
-            // Stop and clean up the client before exiting the program
             client.Dispose().Wait();
         }
+
+
+
+
+
+        public static void SearchMessages(String strCurrencyType, int intIndexOfForLoop)
+        {
+            if(msgListOfMessages[intIndexOfForLoop].cryptocurrency == strCurrencyType)
+            {
+                msgListOfSearchedMessages.Add(msgListOfMessages[intIndexOfForLoop]);
+            }
+            //else
+            //{
+            //    Console.WriteLine("did NOT match type ETH");
+            //}
+        }
+
 
         public static Message ReadToObject(string json)
         {
@@ -64,6 +79,9 @@ namespace CryptoCausationTrackerCLI
             ms.Close();
             return deserializedMessage;
         }
+
+
+
 
     }
 }
