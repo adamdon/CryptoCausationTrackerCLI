@@ -46,7 +46,7 @@ namespace CryptoCausationTrackerCLI
                 }
             };
 
-
+            Console.WriteLine("Test end of forloop");
             client.CreateSubscription(channel, SubscriptionModes.Simple, observer);
 
             Console.ReadKey();
