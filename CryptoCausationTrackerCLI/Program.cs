@@ -43,6 +43,7 @@ namespace CryptoCausationTrackerCLI
 
                     SearchMessages(strSearchCriteria, intIndexOfForLoop);
                     View.Update(intIndexOfForLoop);
+
                     intIndexOfForLoop = intIndexOfForLoop + 1;
                 }
             };
@@ -59,7 +60,7 @@ namespace CryptoCausationTrackerCLI
 
         public static void SearchMessages(String strCurrencyType, int intIndexOfForLoop)
         {
-            if(msgListOfMessages[intIndexOfForLoop].cryptocurrency == strCurrencyType)
+            if(msgListOfMessages[intIndexOfForLoop].cryptocurrency == strCurrencyType && msgListOfMessages[intIndexOfForLoop].basecurrency == "USD")
             {
                 msgListOfSearchedMessages.Add(msgListOfMessages[intIndexOfForLoop]);
             }
