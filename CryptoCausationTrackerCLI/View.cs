@@ -29,6 +29,9 @@ namespace CryptoCausationTrackerCLI
             Console.Write("#  ");
             Console.WriteLine("Avg ETH/USD price: : " + GetAveragePrice(GetTotalPrice()) + " ");
             Console.WriteLine("##############################");
+            Console.Write("#  ");
+            Console.WriteLine("Trades Processed : " + intIndexOfForLoop + " ");
+            Console.WriteLine("##############################");
         }
 
         public static double GetTotalPrice()
