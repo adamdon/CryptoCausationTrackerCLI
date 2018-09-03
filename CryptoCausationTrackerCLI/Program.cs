@@ -18,10 +18,13 @@ namespace CryptoCausationTrackerCLI
         const string appkey = "08887F4cC5Fb788f899F3bc2bF2deA75";
         const string channel = "cryptocurrency-market-data";
 
-        static string strOutputText = "Error1";
-        static string strSearchCriteria = "ETH";
+        static string strOutputDataMsgText = "Error1";
+        static string strCryptoCurrencySearchCriteria = "ETH";
+        static string strBaseCurrencySearchCriteria = "USD";
+
         static public List<Message> msgListOfMessages = new List<Message>();
         static public List<Message> msgListOfSearchedMessages = new List<Message>();
+
         static int intIndexOfForLoop = 0;
 
         static void Main()
@@ -32,16 +35,15 @@ namespace CryptoCausationTrackerCLI
             client.Start();
             var observer = new SubscriptionObserver();
 
-
             observer.OnSubscriptionData += (ISubscription sub, RtmSubscriptionData data) =>
             {
                 foreach (JToken msg in data.Messages)
                 {
-                    strOutputText = msg.ToString();
-                    Message msgTempMessage = new Message(ReadToObject(strOutputText));
+                    strOutputDataMsgText = msg.ToString();
+                    Message msgTempMessage = new Message(ReadToObject(strOutputDataMsgText));
                     msgListOfMessages.Insert(intIndexOfForLoop, msgTempMessage);
 
-                    SearchMessages(strSearchCriteria, intIndexOfForLoop);
+                    DataAnalysis.SearchMessages(strCryptoCurrencySearchCriteria, strBaseCurrencySearchCriteria, intIndexOfForLoop);
                     View.Update(intIndexOfForLoop);
 
                     intIndexOfForLoop = intIndexOfForLoop + 1;
@@ -52,22 +54,6 @@ namespace CryptoCausationTrackerCLI
             client.CreateSubscription(channel, SubscriptionModes.Simple, observer);
             Console.ReadKey();
             client.Dispose().Wait();
-        }
-
-
-
-
-
-        public static void SearchMessages(String strCurrencyType, int intIndexOfForLoop)
-        {
-            if(msgListOfMessages[intIndexOfForLoop].cryptocurrency == strCurrencyType && msgListOfMessages[intIndexOfForLoop].basecurrency == "USD")
-            {
-                msgListOfSearchedMessages.Add(msgListOfMessages[intIndexOfForLoop]);
-            }
-            //else
-            //{
-            //    Console.WriteLine("did NOT match type ETH");
-            //}
         }
 
 

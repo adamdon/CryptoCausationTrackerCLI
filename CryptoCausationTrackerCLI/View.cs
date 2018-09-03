@@ -12,13 +12,13 @@ namespace CryptoCausationTrackerCLI
         {
             if((intIndexOfForLoop % 10) == 0 && (intIndexOfForLoop > 10))
             {
-                Draw(intIndexOfForLoop);
+                DrawDataOutput(intIndexOfForLoop);
             }
             
 
 
         }
-        public static void Draw(int intIndexOfForLoop)
+        public static void DrawDataOutput(int intIndexOfForLoop)
         {
             Console.Clear();
             Console.WriteLine("##############################");
@@ -27,42 +27,24 @@ namespace CryptoCausationTrackerCLI
             Console.Write("#  ");
             Console.WriteLine("Price: : " + Program.msgListOfMessages[intIndexOfForLoop].price + " ");
             Console.Write("#  ");
-            Console.WriteLine("Avg ETH/USD price: : " + GetAveragePrice(GetTotalPrice()) + " ");
+            Console.WriteLine("Avg ETH/USD price: : " + DataAnalysis.GetAveragePrice() + " ");
             Console.WriteLine("##############################");
             Console.Write("#  ");
             Console.WriteLine("Trades Processed : " + intIndexOfForLoop + " ");
             Console.WriteLine("##############################");
         }
 
-        public static double GetTotalPrice()
+        public static void DrawStartScreen()
         {
-            double intTotalPrice = 0;
-            double intCurrentPrice = 0;
-
-            for (int index = 0; index < Program.msgListOfSearchedMessages.Count; index++ )
-            {
-                intCurrentPrice = double.Parse(Program.msgListOfSearchedMessages[index].price);
-                intTotalPrice = intTotalPrice + intCurrentPrice;
-            }
-
-            return intTotalPrice;
-        }
-
-        public static double GetAveragePrice(double intTotalPrice)
-        {
-            double intAveragePrice = 0;
-            double intAmountOfPrices = 0;
-
-            intAmountOfPrices = Program.msgListOfSearchedMessages.Count;
-            intAveragePrice = intTotalPrice / intAmountOfPrices;
-
-            return intAveragePrice;
+            Console.Clear();
+            Console.WriteLine("##############################");
+            Console.Write("#  ");
+            Console.WriteLine("");
         }
 
 
 
-
-
+   
 
     }
 
