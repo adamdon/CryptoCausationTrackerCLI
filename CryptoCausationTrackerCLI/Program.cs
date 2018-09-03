@@ -18,20 +18,15 @@ namespace CryptoCausationTrackerCLI
         const string appkey = "08887F4cC5Fb788f899F3bc2bF2deA75";
         const string channel = "cryptocurrency-market-data";
 
-        static string strOutputDataMsgText = "Error1";
-        static string strCryptoCurrencySearchCriteria = "ETH";
-        static string strBaseCurrencySearchCriteria = "USD";
-
-        static public List<Message> msgListOfMessages = new List<Message>();
-        static public List<Message> msgListOfSearchedMessages = new List<Message>();
-
-        static int intIndexOfForLoop = 0;
-
         static void Main()
         {
+            int intIndexOfForLoop = 0;
+
+            // DataStorage.strCryptoCurrencySearchCriteria = View.DrawStartScreen(); //turn off for debug
+
             Trace.Listeners.Add(new ConsoleTraceListener());
             IRtmClient client = new RtmClientBuilder(endpoint, appkey).Build();
-            client.OnEnterConnected += cn => Console.WriteLine("Connected to Satori RTM!");
+            client.OnEnterConnected += cn => Console.WriteLine("Connected to Data Steam");
             client.Start();
             var observer = new SubscriptionObserver();
 
@@ -39,12 +34,9 @@ namespace CryptoCausationTrackerCLI
             {
                 foreach (JToken msg in data.Messages)
                 {
-                    strOutputDataMsgText = msg.ToString();
-                    Message msgTempMessage = new Message(ReadToObject(strOutputDataMsgText));
-                    msgListOfMessages.Insert(intIndexOfForLoop, msgTempMessage);
+                    Message msgTempMessage = new Message(ReadToObject(msg.ToString()));
 
-                    DataAnalysis.SearchMessages(strCryptoCurrencySearchCriteria, strBaseCurrencySearchCriteria, intIndexOfForLoop);
-                    View.Update(intIndexOfForLoop);
+                    Controller.Loop(msgTempMessage, intIndexOfForLoop);
 
                     intIndexOfForLoop = intIndexOfForLoop + 1;
                 }

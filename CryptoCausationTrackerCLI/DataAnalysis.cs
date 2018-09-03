@@ -14,9 +14,9 @@ namespace CryptoCausationTrackerCLI
             double intTotalPrice = 0;
             double intCurrentPrice = 0;
 
-            for (int index = 0; index < Program.msgListOfSearchedMessages.Count; index++)
+            for (int index = 0; index < DataStorage.msgListOfSearchedMessages.Count; index++)
             {
-                intCurrentPrice = double.Parse(Program.msgListOfSearchedMessages[index].price);
+                intCurrentPrice = double.Parse(DataStorage.msgListOfSearchedMessages[index].price);
                 intTotalPrice = intTotalPrice + intCurrentPrice;
             }
 
@@ -28,18 +28,37 @@ namespace CryptoCausationTrackerCLI
             double intAveragePrice = 0;
             double intAmountOfPrices = 0;
 
-            intAmountOfPrices = Program.msgListOfSearchedMessages.Count;
+            intAmountOfPrices = DataStorage.msgListOfSearchedMessages.Count;
             intAveragePrice = GetTotalPrice() / intAmountOfPrices;
+            intAveragePrice = Math.Round(intAveragePrice, 2);
 
             return intAveragePrice;
         }
 
-        public static void SearchMessages(String strCryptoCurrencyType, String strBaseCurrencyType, int intIndexOfForLoop)
+        public static int GetCryptoTypeOccurrences(string strBaseCurrencySearchCriteria)
         {
-            if ((Program.msgListOfMessages[intIndexOfForLoop].cryptocurrency == strCryptoCurrencyType) && (Program.msgListOfMessages[intIndexOfForLoop].basecurrency == strBaseCurrencyType))
+            int intNumberOfOccurrences = 0;
+
+            for (int index = 0; index < DataStorage.msgListOfMessages.Count; index++)
             {
-                Program.msgListOfSearchedMessages.Add(Program.msgListOfMessages[intIndexOfForLoop]);
+                if (DataStorage.msgListOfMessages[index].cryptocurrency == strBaseCurrencySearchCriteria)
+                {
+                    intNumberOfOccurrences = intNumberOfOccurrences + 1;
+                }
             }
+
+            return intNumberOfOccurrences;
+        }
+
+
+
+        public static bool SearchMessages(String strCryptoCurrencyType, String strBaseCurrencyType, int intIndexOfForLoop)
+        {
+            if ((DataStorage.msgListOfMessages[intIndexOfForLoop].cryptocurrency == strCryptoCurrencyType) && (DataStorage.msgListOfMessages[intIndexOfForLoop].basecurrency == strBaseCurrencyType))
+            {
+                return true;
+            }
+            return false;
         }
 
     }
