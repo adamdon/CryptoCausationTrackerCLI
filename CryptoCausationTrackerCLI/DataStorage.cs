@@ -14,7 +14,7 @@ namespace CryptoCausationTrackerCLI
         public static string strCryptoCurrencySearchCriteria = "ETH";
         public static string strBaseCurrencySearchCriteria = "USD";
 
-        public static List<string> strCryptoTypesArray;
+        public static List<string> strCryptoTypesArray = new List<string>();
 
 
         public static void UpdateSearch(bool isSearchResults, int intIndexOfForLoop)
@@ -26,11 +26,13 @@ namespace CryptoCausationTrackerCLI
 
         }
 
-        public static void UpdateCryptoTypes(bool isCryptoTypeNew, string strCryptoType)
+        public static void UpdateCryptoTypes(int intIndexOfForLoop)
         {
-            if (isCryptoTypeNew == true)
+            string strTempCryptoType = DataStorage.msgListOfMessages[intIndexOfForLoop].cryptocurrency;
+
+            if (DataAnalysis.IsCryptoTypeNew(strTempCryptoType) == true)
             {
-                strCryptoTypesArray.Add(strCryptoType);
+                strCryptoTypesArray.Add(strTempCryptoType);
             }
         }
 

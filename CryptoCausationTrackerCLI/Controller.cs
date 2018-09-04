@@ -12,6 +12,7 @@ namespace CryptoCausationTrackerCLI
         {
             DataStorage.msgListOfMessages.Insert(intIndexOfForLoop, msgIncommingMessage);
             DataStorage.UpdateSearch(DataAnalysis.SearchMessages(DataStorage.strCryptoCurrencySearchCriteria, DataStorage.strBaseCurrencySearchCriteria, intIndexOfForLoop), intIndexOfForLoop);
+            DataStorage.UpdateCryptoTypes(intIndexOfForLoop);
 
             if ((intIndexOfForLoop % 5) == 0 && (intIndexOfForLoop > 10))
             {

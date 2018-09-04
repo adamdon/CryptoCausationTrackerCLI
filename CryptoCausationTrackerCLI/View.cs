@@ -26,6 +26,8 @@ namespace CryptoCausationTrackerCLI
             Console.Write("#  ");
             Console.WriteLine("Avg ETH/USD price: : " + DataAnalysis.GetAveragePrice() + " ");
             Console.Write("#  ");
+            DrawAllCryptoTypes();
+            //Console.WriteLine("Test : " + DataStorage.strCryptoTypesArray[1]);
             Console.WriteLine("Number of ETH trades: : " + DataAnalysis.GetCryptoTypeOccurrences(DataStorage.strCryptoCurrencySearchCriteria) + " ");
             Console.WriteLine("##############################");
             Console.Write("#  ");
@@ -45,6 +47,17 @@ namespace CryptoCausationTrackerCLI
             Console.WriteLine("##############################");
 
             return strInputedCryptoType;
+        }
+
+        public static void DrawAllCryptoTypes()
+        {
+            Console.Write("#  ");
+            for (int index = 0; index < DataStorage.strCryptoTypesArray.Count; index++)
+            {
+                Console.Write("  ");
+                Console.Write(DataStorage.strCryptoTypesArray[index]);
+                Console.Write("  ");
+            }
         }
 
 
