@@ -26,15 +26,15 @@ namespace CryptoCausationTrackerCLI
 
         }
 
-        public static void UpdateCryptoTypes(int intIndexOfForLoop)
-        {
-            string strTempCryptoType = DataStorage.msgListOfMessages[intIndexOfForLoop].cryptocurrency;
+        //public static void UpdateCryptoTypes(int intIndexOfForLoop)
+        //{
+        //    string strTempCryptoType = DataStorage.msgListOfMessages[intIndexOfForLoop].cryptocurrency;
 
-            if (DataAnalysis.IsCryptoTypeNew(strTempCryptoType) == true)
-            {
-                strCryptoTypesArray.Add(strTempCryptoType);
-            }
-        }
+        //    if (DataAnalysis.IsCryptoTypeNew(strTempCryptoType) == true)
+        //    {
+        //        strCryptoTypesArray.Add(strTempCryptoType);
+        //    }
+        //}
 
 
     }

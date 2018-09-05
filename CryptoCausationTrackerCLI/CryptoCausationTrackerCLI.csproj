@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
+    <Compile Include="CryptoType.cs" />
     <Compile Include="DataStorage.cs" />
     <Compile Include="DataAnalysis.cs" />
     <Compile Include="Message.cs" />

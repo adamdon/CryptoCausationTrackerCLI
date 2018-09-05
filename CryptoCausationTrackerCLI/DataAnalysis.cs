@@ -63,24 +63,21 @@ namespace CryptoCausationTrackerCLI
 
         }
 
-        public static bool IsCryptoTypeNew(string strCryptoType)
-        {
-            //bool IsCryptoTypeNew = false;
-
-            for (int index = 0; index < DataStorage.msgListOfMessages.Count; index++)
-            {
-                if (DataStorage.msgListOfMessages[index].cryptocurrency == strCryptoType)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-
-            }//end of for 
-            return false;
-        } //end of method
+        //public static bool IsCryptoTypeNew(string strCryptoType)
+        //{
+        //    for (int index = 0; index < DataStorage.msgListOfMessages.Count; index++)
+        //    {
+        //        if (DataStorage.msgListOfMessages[index].cryptocurrency == strCryptoType)
+        //        {
+        //            return false;
+        //        }
+        //        else
+        //        {
+        //            return true;
+        //        }
+        //    }//end of for 
+        //    return false;
+        //} //end of method
 
     }
 }
