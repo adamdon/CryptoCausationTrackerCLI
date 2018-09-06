@@ -15,6 +15,7 @@ namespace CryptoCausationTrackerCLI
         {
             strCryptoTypeName = strCryptoTypeNameP;
             intNumberOfOccurrences = intNumberOfOccurrencesP;
+            
         }
 
     }

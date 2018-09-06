@@ -63,6 +63,17 @@ namespace CryptoCausationTrackerCLI
 
         }
 
+
+        public static CryptoType MakeNewCryptoType(string strCryptoTypeNameP)
+        {
+            string strCryptoTypeName = strCryptoTypeNameP;
+            int intNumberOfOccurrences = 1;
+
+            CryptoType NewCryptoType = new CryptoType(strCryptoTypeName, intNumberOfOccurrences);
+
+            return NewCryptoType;
+        }
+
         //public static bool IsCryptoTypeNew(string strCryptoType)
         //{
         //    for (int index = 0; index < DataStorage.msgListOfMessages.Count; index++)
